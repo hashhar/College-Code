@@ -1,0 +1,72 @@
+\chapterLabel{General Description}
+
+This section will give an overview of the whole system. The system will be explained in its context to show how the
+system interacts with other systems and introduce the basic functionality of it. It will also describe what type of
+stakeholders that will use the system and what functionality is available for each type. At last, the constraints and
+assumptions for the system will be presented.
+
+\sectionLabel{Product Perspective}
+
+This system will consist of two parts: one Windows desktop application and one extensibility API for writing plugins
+that interact with the desktop application. The desktop application will be used to manage blogs while the extensibility
+API will be used for writing plugins that modify behaviour of the desktop application or add additional features. The
+desktop application will need to communicate to a web server which hosts the blog over the internet during it's first
+time setup and additionally when publishing content or retreiving media files. The product will be written using C\# and
+the .NET framework and hence expects that the machine where the software will be run is a Windows machine with .NET
+Framework 4.6 available or a Linux machine with Mono or dotNET Core installed.
+
+There are similar products which allow blog management but most are limited to a single blog software like PHP WordPress
+Dashboard, Ghost Desktop App, Hootsuite etc. and all of them invariably need internet connectivity for proper
+functioning.
+
+\sectionLabel{Product Features}
+
+A summary of product features follows:
+
+\begin{itemize}
+    \item {Connect to online blog accounts which use WordPress, Google Blogger or Jekyll.}
+    \item {Create new blog posts including post text, images, categories and additional metadata.}
+    \item {Create new draft posts server side which are published by the server. Only WordPress supports this.}
+    \item {Create new local draft posts which can be scheduled and synced automatically provided Internet is available
+           and the machine is turned on at the scheduled time.}
+    \item {Locally preview posts and drafts using the same theme as on the remote blog.}
+    \item {Manage blog comments including writing, deleting or marking a comment for review. Only Google Blogger and
+           WordPress support this.}
+    \item {Periodic sync to ensure that the data on the online blog and the local data are not inconsistent with
+           automatic resolution of inconsistensies using heurestics.}
+    \item {Addition of a secondary blog in addition to the primary blog required to use the software.}
+    \item {Export of all blog posts and drafts from an existing blog to an XML based format or plaintext format
+           depending on further needs.}
+\end{itemize}
+
+\sectionLabel{User Characteristics}
+
+There are two types of users that interact with the system: users of the desktop application, and users of the
+extensibility APIs. Each of these types of users have different uses of the system so each of them have their own
+requirements. The desktop application users can only use the application to manage the blogs using functions discussed
+in section 2.3 above. The extension authors will not use the desktop application directly but can instead interact with
+it programmatically using the provided extensibility API. The extensibility API should ideally be wrapped using a
+library that provides binding in popular languages like C\#, C++, Ruby and Python but that will be subject to feature
+prioritisation during the development of the product.
+
+\sectionLabel{General Constraints}
+
+The desktop application is constrained by the system resources only. The biggest constraint is the availability of
+internet for the first time setup of the software and during media retreival. Another third party constraint is the
+availability of the web server where the user's blog is hosted. The software is also somewhat limited by the locale that
+the user uses their system in because there are no localizations planned for the initial version of the software meaning
+that the entire interface will use English US as the interface language.
+
+\sectionLabel{Assumptions and Dependencies}
+
+One assumption about the product is that it will always be used on desktop machines that have a means of running the
+.NET Framework either natively or using a host system like Mono. If the desktop does not have the .NET Framework
+available then the software will simply refuse to install. Another assumption is the absence of any firewall
+restrictions for the application or the presence of a sane proxy to use the internet for all operations that require
+internet connectivity.
+
+\sectionLabel{Apportioning of Requirements}
+
+In the case that the project is delayed, there are some requirements that could be transferred to the next version of
+the application. Those requirements are to be developed in the second release. See the revised versions of the SRS for
+reference.

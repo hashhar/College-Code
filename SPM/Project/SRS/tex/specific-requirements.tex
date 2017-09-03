@@ -1,0 +1,344 @@
+\chapterLabel{Specific Requirements}
+
+This section contains all of the functional and quality requirements of the system. It gives a detailed description of
+the system and all its features.
+
+\sectionLabel{External Interface Requirements}
+
+This section provides a detailed description of all inputs into and outputs from the system. It also gives a description
+of the hardware, software and communication interfaces and provides basic prototypes of the user interface.
+
+\subsectionLabel{User Interface}
+
+A first-time user of the desktop application should see the first-time setup wizard which is a 7 step wizard to automate
+the setting up of a blog for use with the software. The first-time setup wizard will now be referred to as OOBE (for Out
+of Box Experience). There should be an option to allow a user to skip the OOBE if they so want but doing so should
+provide the user with a detailed message about how to start the OOBE again if needed.
+
+\subsubsectionLabel{Out of Box Experience}
+
+The user should be greeted with an OOBE when starting the software for the first time and also when explicitly invoked
+using a menu. The OOBE is a 7 step wizard to help connect an online blog to the software. It consists of the following
+steps:
+
+\begin{enumerate}
+    \item {Selection of an online blog source. The source can be a WordPress blog (either self-hosted or on
+           wordpress.com), a Google Blogger blog or a Jekyll blog (self-hosted or on GitHub pages).}
+    \item {Providing the user credentials to the blog to allow connecting to the blog and retrieving information.}
+    \item {Customizing operating modes for the blog and giving the source a name to allow easier management of multiple
+           sources.}
+    \item {Optional step for downloading the theme currently in use at the online blog to allow a one to one local
+           preview even without internet connectivity.}
+    \item {Optional step for retrieval of comments left on the blog.}
+    \item {Creation of a test post on the blog to ensure that the connection works properly. The test post should be
+           deleted as soon as the OOBE finishes.}
+    \item {Writing the OOBE settings to the Windows registry to ensure that the OOBE runs only once unless explicitly
+           invoked.}
+\end{enumerate}
+
+\subsubsectionLabel{Normal Operation Interface}
+
+During normal operation the interface should mimic that of Microsoft Office Word. It means that there should be a
+ribbon-interface toolbar on the top of the window to provide access to all the menus available in the software. Each
+section of the ribbon should be accessible using an intuitive keyboard shortcut. Furthermore, each individual option
+within a ribbon panel should also be accessible using nothing but the keyboard.
+
+Below the ribbon interface should be the main text editor. The text editor should have three modes of operation which
+should be indicated by three buttons at the bottom of the text editor. The three modes are:
+
+\begin{description}
+    \item [Markdown mode:] The text in this mode is the Markdown equivalent of the text entered in the other modes.
+    \item [HTML mode:] The text in this mode is the HTML output that will be generated and used to render the post.
+    \item [Rich Text mode:] This is the default mode and is similar to how Microsoft Office Word works. The user can
+          apply formatting using toolbar buttons and keyboard shortcuts and the changes will be reflected in other
+          modes.
+    \item [Preview mode:] This is a read-only mode where the user can see the rendered output --- how the post will look
+          in a browser when published on the blog. The user needs to have set up the offline theme capability during
+          the blog setup process to use this feature. This mode will notify the user to do so if they haven't already
+          done it.
+\end{description}
+
+\subsubsectionLabel{Management Interface}
+
+A separate menu based interface is used to manage the connected blogs. The interface should be a two-pane interface with
+sections on the left side and corresponding information on the right hand side. The main sections should include the
+following:
+
+\begin{description}
+    \item [Blog Accounts:] This section should list all the currently connected blogs along with the URLs where they are
+          hosted and should prominently display identifiable branding so that the user can easily differentiate between
+          different blog services. It should provide the following operations:
+        \begin{enumerate}
+            \item {Viewing details of existing connections.}
+            \item {Removing existing connections after confirming the action. Additionally the software should prompt
+                   the user to sync information if the local changes have not been synced with the online blog to
+                   ensure that no data is lost.}
+            \item {Adding new connections. The blog provider branding should be prominently visible to make sure that
+                   the user knows which type of blog they are adding.}
+            \item {Changing blog connection credentials. It is possible that the blog's user authentication credentials
+                   have been changed after setting up the blog (due to the user changing their password). To help fix
+                   this issue the user can simply change the stored password and username from this menu to avoid the
+                   need to reconnect to the blog from scratch.}
+            \item {Explicitly starting the OOBE. This menu should provide a button to explicitly start the OOBE if the
+                   user skipped it during the first-time startup of the application.}
+        \end{enumerate}
+    \item [Plugins:] This section should provide a list of currently installed plugins with a button to open the
+          plugin's settings. There should also be a button to list all available plugins. The list will be retrieved
+          from the internet and cached until the next time internet connectivity is detected.
+    \item [Text Editor:] This section will list all the settings pertaining to the text editor including the following:
+        \begin{enumerate}
+            \item {Default mode for the text editor.}
+            \item {Default font used for the Markdown mode.}
+            \item {Markdown flavour used. The software should handle CommonMark, GitHub Flavoured Markdown and both
+                   Setext and ATX style headers.}
+            \item {Enabling and disabling of syntax highlighting if code is detected.}
+            \item {Word wrap and other similar features.}
+        \end{enumerate}
+    \item [Internet Settings:] This section allows the configuration of the following:
+        \begin{enumerate}
+            \item {Whether to use a proxy server to connect to the internet.}
+            \item {Proxy server to use for HTTP connections.}
+            \item {Proxy server to use for HTTPS connections.}
+            \item {Maximum bandwidth the product is allowed to use.}
+        \end{enumerate}
+    \item [Update Settings:] This section allows the user to check for any available updates or to switch from the
+          regular update channel to nightly releases channel.
+\end{description}
+
+\subsectionLabel{Hardware Interface}
+
+Since neither the desktop application nor the extensibility API have any designated hardware, it does not have any
+direct hardware interfaces.
+
+\subsectionLabel{Software Interface}
+
+The desktop application communicates with the web server where the blog is hosted in order to get the data from the blog
+including previous posts, drafts, comments and associated metadata.
+
+\subsectionLabel{Communication Interface}
+
+The communication between the different parts of the system is important since they depend on each other. However, in
+what way the communication is achieved is not important for the system and is therefore handled by the underlying
+operating systems for both the desktop application and the extensibility API.
+
+\sectionLabel{Functional Requirements}
+
+This section includes the requirements that specify all the fundamental actions of the software system.
+
+\subsectionLabel{Download}
+
+The user should be able to download and install the desktop application from an application store or a direct download
+link.
+
+\subsectionLabel{Update delivery and notification}
+
+The software should notify the user of any available software updates and download and apply them according to the
+settings user has configured in the application.
+
+\subsectionLabel{Connecting a blog with the software}
+
+The software should allow a user to connect a publicly accessible blog to the software.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The web address of the blog.}
+        \item {The type of blog or the service that it is hosted on. Can be one of Google Blogger, WordPress, Jekyll or
+               GitHub Pages.}
+        \item {User credentials for authenticating to the website. Google Blogger additionally requires that API access
+               is enabled in Google Blogger settings.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Send an HTTP GET request to the web address to ensure that the address exists.}
+        \item {Check that the type of blog at the web address matches the type specified by the user.}
+        \item {Download the files from the blog including theme, content and metadata.}
+        \item {Create a test post on the blog using the application and check if it was created correctly to verify that
+               the connection is working.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+        \begin{enumerate}[noitemsep]
+        \item {In the case of absence of a website at the URL we present a message to the user to fix the URL.}
+        \item {In the case of mismatch between user specified blog type and detected blog type we present a message a
+               message to the user with the option of automatically fixing their mistake.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Creating a new post}
+
+The software should allow the user to create a new blog post.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The title of the blog post.}
+        \item {The category of the blog post.}
+        \item {The published state of the post. It can be published or draft.}
+        \item {The blog connection on which the post is to be made.}
+        \item {The associated metadata specific to every blog provider.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Create a file on the local filesystem in the application's data directory representing the post heirarchy
+               on the associated blog account.}
+        \item {Create a metadata file of the same name as the post with a different extension to keep track of
+               associated post metadata.}
+        \item {Present the post file in the application's editor. The default mode should be rich text editing mode.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+        \begin{enumerate}[noitemsep]
+        \item {If a post by the same name already exists on the same blog, provide an alert to the user and allow them
+               to change the name without having to create another post from scratch.}
+        \item {If a post by the same name already exists on the same blog but is not synced locally, alert the user the
+               next time the application tries to sync data from the online blog.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Rename an existing post}
+
+The software should allow the user to rename an existing post.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The title of the blog post to rename.}
+        \item {The category of the blog post.}
+        \item {The published state of the post. It can be published or draft.}
+        \item {The blog connection to which the post belongs.}
+        \item {The new name to give to the blog post.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Check if a file corresponding to the new name already exists in the application's data directory. If it
+               does, alert the user and allow them to change the name without starting over.}
+        \item {Create a new file on the local filesystem and copy the contents of the current file over to the new
+               file. This should include the metadata and url files as well.}
+        \item {Delete the files with the old name only after ensuring that the newly created files can be read correctly
+               and there is no difference in the content.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+    \begin{enumerate}[noitemsep]
+        \item {A file with the new name already exists then alert the user and allow them to change the name without
+               having to start the rename process again.}
+        \item {If a post by the same name already exists on the same blog but is not synced locally, alert the user the
+               next time the application tries to sync data from the online blog.}
+        \item {The rename failed due to some other reason then transparently roll-back the changes and inform the user
+               about it. Allow them to either retry the action, abort the action or look at the logs to allow submitting
+               them to the developers for further investigation.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Modify an existing post}
+
+The software should allow the user to modify an existing post including it's title, content, metadata, media, published
+status and publish date.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The title of the blog post to modify.}
+        \item {The category of the blog post.}
+        \item {The published state of the post. It can be published or draft.}
+        \item {The blog connection to which the post belongs.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Open a new window with two panes, the left one for editing the visual content (title, body, media etc.)
+               and the right pane to edit the metadata like post category, published status, date, author etc.}
+        \item {Allow the user to edit any and all of those fields freely.}
+        \item {Create an autosave of the new information as backup every 1 minute.}
+        \item {Prompt the user to save the information when closing the window if any changes were made.}
+        \item {Saving the changed information should edit the backing files in-place instead of creating new copies to
+               avoid overhead.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+    \begin{enumerate}[noitemsep]
+        \item {A file with the new name already exists then alert the user and allow them to change the name without
+               having to start the modify process again.}
+        \item {If a post by the same name already exists on the same blog but is not synced locally, alert the user the
+               next time the application tries to sync data from the online blog.}
+        \item {The modification failed due to some other reason then transparently roll-back the changes and inform the
+               user about it. Allow them to either retry the action, abort the action or look at the logs to allow
+               submitting them to the developers for further investigation.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Add media to a post}
+
+The software should allow the user to attach media files of any type as long as they are supported by the blog provider.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The title of the blog post to add the media to.}
+        \item {Optional: Location within the document where to attach the media file.}
+        \item {The list of filetypes accepted by the blog provider.}
+        \item {The URL or local fileystem URI to the media to attach.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Open a two paned window with a URL bar and browse button on the top to allow for manually providing a URI
+               to fetch the media files from.}
+        \item {The left pane shows previews of the media file currently selected.}
+        \item {The right pane allows modifying the properties of the media file before inserting it into the blog post.}
+        \item {If internet connectivity is available then the software should fetch the media files from remote URLs
+               otherwise it should simply write the URL to the URL file associated with the blog post so that the media
+               can be retrieved at a later time.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+    \begin{enumerate}[noitemsep]
+        \item {If the filetype is not supported by the blog provider alert the user about the same and show them a list
+               of accepted filetypes.}
+        \item {If the remote media could not be fetched inform the user and ask them if to retry or write the
+               information to the associated URL file for later updatation.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Delete a post}
+
+The software should allow the user to delete any existing posts as long as the user has sufficient priviledges.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The title of the blog post to delete.}
+        \item {The user priviledge level on the blog.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Show a confirmation message asking the user to confirm the action. If the user accepts it then delete the
+               post but keep a local copy of it for at least 30 days.}
+        \item {Move the data files, metadata and url files to a specific directory used to store deleted posts.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The user doesn't have sufficient privileges for the action then alert the user asking them to contact an
+               administrator or log in using the blog administrator's account.}
+    \end{enumerate}
+\end{description}
+
+\subsectionLabel{Schedule a blog post}
+
+The software should allow a user to schedule a blog post to be published at a future time and date.
+
+\begin{description}
+    \item [Inputs:] ~
+    \begin{enumerate}[noitemsep]
+        \item {The blog entry to schedule.}
+        \item {The date and time on which to schedule the post.}
+    \end{enumerate}
+    \item [Process:] ~
+    \begin{enumerate}[noitemsep]
+        \item {Show a dialog box telling the date and time both in local timezone and UTC timezone to allow the user to
+               confirm if the times are correct. If the user accepts schedule the post otherwise abort the action.}
+        \item {If the blog provider supports scheduled posts (WordPress and Blogger) use their API to schedule a post.}
+        \item {If the blog provider doesn't support scheduled posts then use the application's own scheduler to create a
+               scheduled job entry and notify the user that the scheduled post will only be posted if the user has the
+               system turned on with internet connectivity.}
+    \end{enumerate}
+    \item [Error Handling:] ~
+    \begin{enumerate}[noitemsep]
+        \item {If the scheduled time is missed due to the system being turned off or no internet connectivity, wait for
+               internet connectivity and update the post after informing the user of the situation.}
+    \end{enumerate}
+\end{description}

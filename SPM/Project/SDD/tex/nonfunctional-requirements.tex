@@ -1,0 +1,40 @@
+\chapterLabel{Non-Functional Requirements}
+
+\sectionLabel{Performance Requirements}
+
+The software should be able to run on any system that allows the installation of the software. That means that any
+system with internet connectivity (even if occasional), Windows with .NET Framework 4.6 (Windows 8 and later have it
+pre-installed) or Linux with Mono.
+
+As for storage requirements the application should not take more than 50MB in a clean install. The software should be
+able to handle arbitrary amount of blog data provided the storage space on the user's system supports it. The software
+should also be mindful of the user's storage space and should leave at-least 10\% of the system storage space empty and
+alert the user about the situation and proceed only if expressly granted permission by the user.
+
+The software is also not computationally expensive and should hence run on almost any processor as long as the
+application can be compiled for the architecture. This generally means that all AMD64, x86-64 and Intel 32-bit
+processors are supported.
+
+The software should also be modest about RAM usage and should be able to perform all functions under 200MB of RAM except
+for media handling or previewing of a theme.
+
+\sectionLabel{Safety Requirements}
+
+As with any software, data loss is a possibility and hence the software should perform all data bound actions using a
+locking mechanism to prevent race conditions and corruption due to simultaneous access of files. The software should
+also perform all filesystem based transactions in an atomic manner to ensure that all actions can be rolled back as long
+as the backup files are available. The atomic transaction support depends on the filesystem that the software is running
+on and hence is not a strict guarantee.
+
+With that said, the software comes with absolutelty no warranty and cannot be held responsible for any loss of data due
+to the use of the software.
+
+\sectionLabel{Security Requirements}
+
+The software has mechanisms to ensure that no user is able to perform an action not allowed at their privilege level on
+the blog. This means that only those blog accounts that are administrators can actually delete posts, or create posts or
+even modify them. The capabilities of non-admin and admin users are not decided by the software but are instead decided
+by the blog provider they are using and the configuration settings on the blog providers.
+
+The software is bound by the security features of the host operating system too and hence cannot modify files of another
+installation of the same software under a different user account.

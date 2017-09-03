@@ -1,0 +1,64 @@
+\chapterLabel{Introduction}
+
+This section gives a scope description and overview of everything included in this SRS document. Also, the purpose for
+this document is described and a list of abbreviations and definitions is provided. It follows the IEEE standard for
+Software Requirements Specification documents.
+
+This section ends with an overview about how the rest of the document is organised to help people reading this document
+have a better understanding of the document.
+
+\sectionLabel{Purpose}
+
+The purpose of this document is to give a detailed descript ion of the requirements for the ``\projectTitle{}'' software. It will illustrate the purpose and complete declaration for the development of system. It will also
+explain system constraints, interface and interactions with other external applications. This document is primarily
+intended to be proposed to a customer for its approval and a reference for developing the first version of the system
+for the development team.
+
+\sectionLabel{Scope}
+
+The ``\projectTitle{}'' is a Windows desktop application which helps blog authors and owners to manage the blog content,
+themes, drafts, posts, media and users while offline. The application should be free to download from either the Windows
+Store or a direct download link from the software vendor. The software should support at least WordPress, Google Blogger
+and Jekyll (GitHub Pages) blogs out of the box. There should be the ability to add external plugins to provide support
+for other blog hosting websites and technologies. The plugin ecosystem should be open so as to allow anyone with
+supported tools to build an extension for the product. The software should not require administrator permissions to
+install or remove to allow it to be used on a per-user installation instead of a system-wide installation.
+
+Furthermore, the software should not need either Internet or GPS connection for any operation expect first time setup,
+media upload and post publishing. The software should provide an environment and tools to assist in automating and
+bringing the publishing process offline so that all the work can be done offline and pushed online when needed without
+the need for constant internet connectivity. The software shouldn't also be limited to managing a single blog at a time
+--- a user should be able to add multiple blog accounts and switch between them seamlessly.
+
+\sectionLabel{Definitions, Acronyms, and Abbreviations}
+
+\begin{center}
+    \begin{tabularx}{\textwidth}{l L}
+        \toprule
+        \textbf{Term} & \textbf{Definition} \\
+        \midrule
+        Software      & The Offline Blog Management Application. \\
+        Blog          & An online WordPress, Google Blogger or Jekyll blog hosted on a publically accessible
+                        internet address. \\
+        Author        & The person submitting an article to be either published or saved as a draft. \\
+        Reviewer      & A person that examines an article and has the ability to recommend approval for publication or
+                        to request that changes be made to the article. \\
+        Stakeholder   & Any person with an interest in the project who is not a developer. \\
+        User          & Author or Reviewer. \\
+        \bottomrule
+    \end{tabularx}
+\end{center}
+
+\sectionLabel{References}
+
+\cite{ieee1998ieee}: IEEE Software Engineering Standards Committee, “IEEE Std 830 - 1998, IEEE Recommended Practice for
+Software Requirements Specifications”, October 20, 1998.
+
+\sectionLabel{Overview}
+
+This document is intended for casual users, developers, testers and documentation writers, each one having their own
+needs and uses of the software. For a more thorough analysis on this matter, please refer to section 2.3. Section 2
+provides an overall description of the software, and section 3 describes the functional requirements of the project,
+particularly useful to all of the aforementioned groups. Section 4 discusses the external interface requirements, and
+finally, in section 5, you can find the non-functional requirements of the project. Each section is divided in
+subsections where different matters are discussed.

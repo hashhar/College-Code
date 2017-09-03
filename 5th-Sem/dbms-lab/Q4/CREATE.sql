@@ -1,0 +1,41 @@
+-- Create the database IF it does not exist AND use it
+CREATE DATABASE IF NOT EXISTS `Ashhar13BCS0015 - Q4`;
+USE `Ashhar13BCS0015 - Q4`;
+
+-- Drop tables if they exist
+DROP TABLE IF EXISTS Allotment0015;
+DROP TABLE IF EXISTS Student0015;
+DROP TABLE IF EXISTS Class0015;
+DROP TABLE IF EXISTS Lab0015;
+
+-- Create Table Class
+CREATE TABLE Class0015 (
+	cid INT PRIMARY KEY,
+	cname VARCHAR(50) NOT NULL,
+	duration INT NOT NULL
+);
+
+-- Create Table Student
+CREATE TABLE Student0015 (
+	stud_no INT PRIMARY KEY,
+	stud_name VARCHAR(50) NOT NULL,
+	dob DATE NOT NULL,
+	cid INT NOT NULL,
+	FOREIGN KEY(cid) REFERENCES Class0015(cid) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+-- Create Table Lab
+CREATE TABLE Lab0015 (
+	mach_no VARCHAR(3) PRIMARY KEY,
+	lab_no INT NOT NULL,
+	description VARCHAR(255)
+);
+
+-- Create Table Allotment
+CREATE TABLE Allotment0015 (
+	stud_no INT NOT NULL,
+	mach_no VARCHAR(3) NOT NULL,
+	doweek VARCHAR(10) NOT NULL,
+	FOREIGN KEY(stud_no) REFERENCES Student0015(stud_no) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY(mach_no) REFERENCES Lab0015(mach_no) ON UPDATE CASCADE ON DELETE CASCADE
+);

@@ -1,0 +1,182 @@
+\ProvidesPackage{spmreport}
+
+% Packages
+\usepackage{titlesec} % Change title formats
+\usepackage{fontspec} % Use TTF fonts
+\usepackage{graphicx} % Images
+% \usepackage{tabularx} % Tables
+\usepackage{float} % Figures
+\usepackage{pdfpages}
+\usepackage{booktabs}
+\usepackage[english]{babel} % datetime depends on it
+% \usepackage[ddmmyyyy]{datetime} % Dates
+\usepackage[nodayofweek,level]{datetime} % Dates
+\usepackage{parskip} % No indent paragraphs
+\usepackage{xstring} % Used for making templabels
+\usepackage{suffix} % Define star commands
+\usepackage{xcolor} % Define colours
+\usepackage{mathtools} % Maths
+\usepackage{amsfonts} % Number set fonts
+\usepackage{hyperref} % Hyperreferences and URLs
+\usepackage{geometry} % Layout
+\usepackage{multirow} % multirow tables
+\usepackage{ltablex} % Long tabularx
+\usepackage{enumitem}
+\keepXColumns
+
+% Set geometry
+% \geometry{a4paper, portrait, left=1.5in, right=1.5in, top=1.5in, bottom=1.5in}
+
+% Allow more sloppy line breaks to prevent overfills
+\setlength{\emergencystretch}{12pt}
+
+% Fonts
+\defaultfontfeatures{Ligatures=TeX} % Enable ligatures like --, `' etc.
+\setmainfont{Times New Roman} % Roman font
+\setsansfont{Arial} % Sans Serif font
+\setmonofont{Fira Mono} % Monospace font
+
+% Font sizes
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\newcommand{\chapfnt}{\sffamily\fontsize{24pt}{28pt}}
+\newcommand{\secfnt}{\sffamily\fontsize{16pt}{19pt}}
+\newcommand{\ssecfnt}{\sffamily\fontsize{14pt}{17pt}}
+\newcommand{\sssecfnt}{\sffamily\fontsize{12pt}{14pt}}
+
+\titleformat{\chapter}[block]
+{\normalfont\chapfnt\bfseries}{\thechapter. }{0pt}{\chapfnt}
+
+\titleformat{\section}
+{\normalfont\secfnt\bfseries}{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\ssecfnt\bfseries}{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\sssecfnt\bfseries}{\thesubsubsection}{1em}{}
+
+\titlespacing*{\chapter} {0pt}{0pt}{2\baselineskip}
+\titlespacing*{\section} {0pt}{1\baselineskip plus 1ex minus .2ex}{.5\baselineskip plus .2ex}
+\titlespacing*{\subsection} {0pt}{1\baselineskip plus 1ex minus .2ex}{.5\baselineskip plus .2ex}
+\titlespacing*{\subsubsection} {0pt}{1\baselineskip plus 1ex minus .2ex}{.5\baselineskip plus .2ex}
+
+% Environments
+\newenvironment{chaptersize}
+{%
+    \fontsize{24pt}{28pt}\selectfont
+}
+{%
+}
+
+\newenvironment{sectionsize}
+{%
+    \fontsize{16pt}{19pt}\selectfont
+}
+{%
+}
+
+\newenvironment{subsectionsize}
+{%
+    \fontsize{14pt}{17pt}\selectfont
+}
+{%
+}
+
+\newenvironment{subsubsectionsize}
+{%
+    \fontsize{12pt}{14pt}\selectfont
+}
+{%
+}
+
+% Paragraph formatting
+\setlength{\parindent}{0pt}
+
+\restylefloat{figure}
+
+% Colours
+\definecolor{light-gray}{gray}{0.95}
+
+% Variables
+% Dates
+\newcommand{\publishDate}{\formatdate{15}{03}{2017}}
+
+% Formatting
+\newcommand{\chapterLabel}[1]{%
+    \clearpage
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \chapter{#1}\label{ch:\templabel}
+}
+
+\WithSuffix\newcommand\chapterLabel*[1]{%
+    \clearpage
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \chapter*{#1}\label{ch:\templabel}
+    \addcontentsline{toc}{chapter}{#1}
+}
+
+\newcommand{\sectionLabel}[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \section{#1}\label{sec:\templabel}
+}
+
+\WithSuffix\newcommand\sectionLabel*[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \section*{#1}\label{sec:\templabel}
+    \addcontentsline{toc}{section}{#1}
+}
+
+\newcommand{\subsectionLabel}[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsection{#1}\label{subsec:\templabel}
+}
+
+\WithSuffix\newcommand\subsectionLabel*[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsection*{#1}\label{subsec:\templabel}
+    \addcontentsline{toc}{subsection}{#1}
+}
+
+\newcommand{\subsubsectionLabel}[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsubsection{#1}\label{subsubsec:\templabel}
+}
+
+\WithSuffix\newcommand\subsubsectionLabel*[1]{%
+    \lowercase{\def\templabel{#1}}
+    \StrSubstitute{\templabel}{ }{-}[\templabel]
+    \subsubsection*{#1}\label{subsubsec:\templabel}
+    \addcontentsline{toc}{subsubsection}{#1}
+}
+
+% Tables
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+% Names
+\newcommand{\reviewerName}{Dr. Bashir Alam}
+\newcommand{\reviewerPost}{Associate Professor, \departmentName{}}
+
+\newcommand{\authorAshhar}{Ashhar Hasan}
+\newcommand{\authorAshharRoll}{13BCS-0015}
+
+\newcommand{\courseName}{B. Tech Computer Engineering (8\textsuperscript{th} Sem)}
+
+\newcommand{\authorsNames}{\authorAshhar{}}
+\newcommand{\authorsBold}{\textbf{\authorAshhar{}}}
+\newcommand{\authorsItalic}{\textit{\authorAshhar{}}}
+
+\newcommand{\departmentName}{Department of Computer Engineering}
+\newcommand{\facultyName}{Faculty of Engineering and Technology}
+\newcommand{\collegeName}{Jamia Millia Islamia}
+\newcommand{\cityNamePin}{New Delhi --- 110025}
+
+\newcommand{\projectTitle}{Offline Blog Management Application}
